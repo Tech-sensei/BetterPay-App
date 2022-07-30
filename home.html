@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- ================ META LINKS ===================== -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ================ FAVICON ===================== -->
+    <link rel="icon" type="image/x-icon" href="./assests/pix_black_48dp-removebg-preview.png" />
+
+    <!-- ================GOOGLE ICONS===================== -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+       <!-- ================FONT AWESOME===================== -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- ================ SCSS LINK ===================== -->
+    <link rel="stylesheet" href="./dist/main.css" />
+
+    <!-- ================ SCRIPT JS===================== -->
+    <script defer src="./script/script.js"></script>
+
+    <title>BetterPay</title>
+  </head>
+
+  <body class="body">
+    <!-- ================ MAIN FORM ============ -->
+    <main class="main-form">
+      <section class="section--wrapper" id="section-wrapper">
+        <div class="login--contents">
+
+          <a href="index.html"><span class="material-icons">arrow_back</span></a>
+
+          <div class="login--img">
+            <img src="./assests/Manage_money-bro-removebg-preview.png" class="form--img" alt="Login Photo">
+
+          </div>
+
+          <div class="form--wrapper">
+
+            <form action="" class="login--in" id="login--in">
+              <div class="form--title">
+                <h1 class="login-title">Sign In</h1>
+              </div>
+
+              <div class="login--box">
+                <span class="material-icons">person</span>
+                <input type="text" placeholder="Username" class="login--input login__input--user">
+              </div>
+
+              <div class="login--box">
+                <span class="material-icons">lock</span>
+                <input type="password" placeholder="Password" class="login--input login__input--pin" id="password">
+              </div>
+
+              <div class="login--forget">
+                <a href="#" class="forget-password">Forget Password?</a>
+              </div>
+
+              <div class="login--button">
+                <button class="btn" type="submit">SIGN IN </button>
+              </div>
+
+              <div class="login--footer">
+                <span class="login--account"> I'm a new user.</span>
+                <span class="sign-up" id="sign-up">Sign Up</span>
+              </div>
+
+            </form>
+
+            <form action="" class="login--create hidden" id="login--up">
+              <div class="form--title">
+                <h1 class="login-title">Create Account</h1>
+              </div>
+
+              <div class="login--box">
+                <span class="material-icons">alternate_email</span>
+                <input type="email" placeholder="Email Address" class="login--input">
+              </div>
+
+              <div class="login--box">
+                <span class="material-icons">person</span>
+                <input type="text" placeholder="Username" class="login--input">
+              </div>
+
+              <div class="login--box">
+              <span class="material-icons">lock</span>
+                <input type="password" placeholder="Password" class="login--input">
+              </div>
+
+              <div class="login--button">
+                <button class="btn" type="submit">SIGN UP </button>
+              </div>
+
+              <div class="login--footer">
+                <span class="login--account"> I'm already a member.</span>
+                <span class="sign-in" id="sign-in">Sign In</span>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- ================ MAIN ============ -->
+    <main class="main hide-main">
+      <!-- ================ HEADER ============ -->
+      <header class="header scroll-header" id="header">
+        <nav class="nav container">
+          <img src="./assests/avatar.png"class="avatar" alt="" />
+          
+          <span class="material-icons notification--icon">notifications</span>
+          <!-- <div class="nav__header"> -->
+              <!-- <span></span> -->
+          <!-- </div> -->
+
+        </nav>
+      </header>
+
+      <nav class="nav__bottom">
+        <a href="#" class="nav__bottom--link active--link">
+          <span class="material-icons nav__bottom--link_icon">account_balance</span>
+          <span class="nav__bottom--link_text">Home</span>
+        </a>
+
+        <a href="#" class="nav__bottom--link">
+          <span class="material-icons nav__bottom--link_icon">savings</span>
+          <span class="nav__bottom--link_text">Savings</span>
+        </a>
+
+        <a href="#" class="nav__bottom--link">
+          <span class="material-icons nav__bottom--link_icon">currency_exchange</span>
+          <span class="nav__bottom--link_text">Finance</span>
+        </a>
+
+        <a href="#" class="nav__bottom--link">
+          <span class="material-icons nav__bottom--link_icon">payment</span>
+          <span class="nav__bottom--link_text">My card</span>
+        </a>
+
+        <a href="#" class="nav__bottom--link">
+          <span class="material-icons nav__bottom--link_icon">account_circle</span>
+          <span class="nav__bottom--link_text">Account</span>
+        </a>
+
+      </nav>
+
+      <!-- ================ ACCOUNT SECTION ============ -->
+      <section class="section account">
+        <div class="account__container container">
+          <div class="account__container--overview">
+            <div class="account-name">
+              <h3>Tobiloba Ibraheem</h3>
+              <span>Active</span>
+            </div>
+
+            <div class="account-details">
+              <h2 class="account-type">Saving Account</h2>
+              <h1 class="account-balance">₦ 2,300,210</h1>
+              <h1 class="balance-hide active-balance">₦ XXXXXX</h1>
+            </div>
+            <div class="account-number">
+
+              <div class="login--box-number">
+                <input type="text" class="login--input--number" value="2377742613">
+                <span class="account--number-btn">
+                  <span class="material-icons">content_copy</span>
+                </span>
+              </div>
+
+              <span>Hide Balance <i class="fa fa-eye balance-icon"></i></span>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================ ACTIVITY SECTION ============ -->
+      <section class="activity">
+        <div class="activity-pop" data-name="deposit">
+          <div class="activity-contents container">
+
+            <div class="activity-contents--header">
+              <h2> Fund Account</h2>
+            </div>
+
+            <div class="activity-contents--methods">
+              <form action="">
+
+                <div class="input__select--method">
+                  <label class="method-label" value="">How would you like to add money? </label>
+                  <select class="input__select" name="payment" id="payment" required>
+                    <option class="option" value="Instant funding within 10 secs">Bank Transfer</option>
+                    <option class="option" value="Fund with your bound bank card">Card Funding </option>
+                    <option class="option" value="Seed a request to any betterPay user">Request Money </option>
+                    <option class="option" value="Fund with your bound Bank Account">Bank Account Funding </option>
+                  </select>
+
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value=""> How much would you like to add?</label>
+                  <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--deposit">
+                </div>
+
+                <div class="input__deposit--method">
+                  <button class="input__btn input__btn--deposit">Deposit</button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="activity-pop" data-name="transfer">
+          <div class="activity-contents container">
+
+            <div class="activity-contents--header">
+              <h2>Send Money</h2>
+            </div>
+
+            <div class="activity-contents--methods">
+              <form action="">
+
+                <div class="input__select--method">
+                  <label class="method-label" value="">who would you like to send money to? </label>
+                  <select class="input__select" name="payment" id="transfer" required>
+                    <option class="option" value="tobiloba"></option>
+                    <option class="option">Iremide Mary</option>
+                    <option class="option">Akinpelu Grace</option>
+                    <option class="option">Oluwatobi Akinpelu</option>
+                    <option class="option">Samuel Jolayemi </option>
+                  </select>
+
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value="">Type the selected account</label>
+                  <input type="text" placeholder="Account name" class="input__amount input__account--transfer">
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value=""> Account number of the receiver</label>
+                  <input type="number" placeholder="0000000000" class="input__amount input__amount--transfer">
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value=""> How much would you like to send?</label>
+                  <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--transfer">
+                </div>
+
+                <div class="input__deposit--method">
+                  <button class="input__btn input__btn--transfer">Transfer</button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="activity-pop" data-name="airtime">
+          <div class="activity-contents container">
+            <div class="activity-contents--header">
+              <h2>Buy Airtime</h2>
+            </div>
+
+            <div class="activity-contents--methods">
+              <form action="">
+
+                <div class="input__amount--method">
+                  <label class="method-label" value="">Remember to buy for love ones😉</label>
+                  <input type="tel" placeholder="+243..........." class="input__amount input__number--airtime"
+                    maxlength="11">
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value=""> How much would you like to buy?</label>
+                  <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--airtime">
+                </div>
+
+                <div class="input__deposit--method">
+                  <button class="input__btn input__btn--airtime">Transfer</button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="activity-pop" data-name="bills">
+          <div class="activity-contents container">
+            <div class="activity-contents--header">
+              <h2>Pay Bills</h2>
+            </div>
+
+            <div class="activity-contents--methods">
+              <form action="">
+
+                <div class="input__select--method">
+                  <label class="method-label" value="">Select Biller </label>
+                  <select class="input__select" name="payment" id="paybils" required>
+                    <option class="option">Electricity IBEDC</option>
+                    <option class="option">Cable Subscription</option>
+                    <option class="option">Electricity IKEDC</option>
+                    <option class="option">LCC (Toll Gate)</option>
+                    <option class="option">Data Service</option>
+                    <option class="option">Gaming & Lottery</option>
+                    <option class="option">Water Bill</option>
+                    <option class="option">JAMB, WAEC & NECO Pin </option>
+                  </select>
+
+                </div>
+
+                <div class="input__amount--method">
+                  <label class="method-label" value=""> Enter the amount you would like to pay </label>
+                  <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--paybill">
+                </div>
+
+                <div class="input__deposit--method">
+                  <button class="input__btn input__btn--paybill">Transfer</button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="activity__container box container">
+
+          <div class="activity__menu activity__menu--deposit" data-target="deposit">
+            <div class="deposit-icon">
+              <span class="fa fa-money" aria-hidden="true">💲</sp>
+            </div>
+            <h3 class="deposit-text">Fund Account</h3>
+          </div>
+
+          <div class="activity__menu activity__menu--transfer" data-target="transfer">
+            <div class="transfer-icon">
+              <span class="fa fa-money" aria-hidden="true">💸</span>
+            </div>
+            <h3 class="transfer-text">Send Money</h3>
+          </div>
+
+          <div class="activity__menu activity__menu--airtime" data-target="airtime">
+            <div class="airtime-icon">
+              <span class="phone" aria-hidden="true"> 📱</span>
+            </div>
+            <h3 class="airtime-text">Airtime</h3>
+          </div>
+
+          <div class="activity__menu activity__menu--bills" data-target="bills">
+            <div class="bills-icon">
+              <span class="phone" aria-hidden="true"> 💰</span>
+            </div>
+            <h3 class="bills-text">Pay Bills</h3>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================ TRANSACTION SECTION ============ -->
+      <section class="transaction">
+        <div class="transaction__container container">
+          <h2 class="transaction__header flex">
+            Transactions
+            <span><a href="#">View All</a></span>
+          </h2>
+
+          <div class="transaction__container--movements">
+            <div class="movements">
+
+              <div class="movements__row">
+                <div class="movements__date">26/07/2022</div>
+                <div class="movements__type movements__type--IN">in</div>
+                <div class="movements__detail">Earnings</div>
+                <div class="movements__value movements__value--IN flex">
+                  ₦ 0000
+                </div>
+              </div>
+
+              <div class="movements__row">
+                <div class="movements__date">26/07/2022</div>
+                <div class="movements__type movements__type--OUT">Out</div>
+                <div class="movements__details">Expense</div>
+
+                <div class="movements__value movements__value--OUT flex">
+                  ₦ 0000
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================ SAVINGS SECTION ============ -->
+      <section class="card">
+        <div class="card__container container">
+          <h2 class="card__header">
+            My Card
+            <span><a href="#">View All</a></span>
+          </h2>
+          <div class="card-flip">
+            <div class="card__container--body">
+
+              <div class="card__container--wrapper bg-pattern-2 front-card">
+                <div class="card__container--wrapper_contents">
+
+                  <div class="card__contents--balance">
+                    <h3>Balance</h3>
+                    <h2>₦ 10,000</h2>
+                  </div>
+
+                  <div class="card__contents--number">
+                    <h2 class="card__number">1234 &nbsp; 5678 &nbsp; 9012 &nbsp; 3456 </h2>
+                  </div>
+
+                  <div class="card__contents--details">
+                    <div class="card__details">
+
+                      <div class="card__date">
+                        <span>Valid <br> Till</span>
+                        <h3 class="card__expiry">09/25</h3>
+                      </div>
+
+                      <h3 class="card__name">TOBILOBA IBRAHEEM</h3>
+                    </div>
+                    <h2 class="card__type">VISA</h2>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="card__container--wrapper bg-pattern-2 back-card">
+                <div class="card__container--wrapper_contents">
+
+                  <div class="card__contents--cvv">
+                    <h3>000</h3>
+                    <div class="card__contents--cvv_summary">
+                      <h3>CVV</h3>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================ SAVINGS SECTION ============ -->
+      <section class="savings">
+        <div class="savings__container container">
+          <h2 class="savings__header">
+            Savings
+            <span><a href="#">View all</a></span>
+          </h2>
+
+          <div class="savings__container--contents">
+            <div class="savings__container--contents_row">
+              <div class="savings__title">
+                <h3>Gaming Console</h3>
+                <p>₦ 8,000</p>
+              </div>
+              <span class="savings__category">Gaming</span>
+              <div class="savings__progress--bar">
+                <div class="savings__progress"><span>85%</span></div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="savings__container--contents">
+            <div class="savings__container--contents_row">
+              <div class="savings__title">
+                <h3>Udemy Course</h3>
+                <p>₦ 4,200</p>
+              </div>
+              <span class="savings__category">Education</span>
+              <div class="savings__progress--bar">
+                <div class="savings__progress course"><span>63%</span></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="savings__container--contents">
+            <div class="savings__container--contents_row">
+              <div class="savings__title">
+                <h3>MacBook Pro 2021</h3>
+                <p>₦ 150,000</p>
+              </div>
+              <span class="savings__category">Lifestyle</span>
+              <div class="savings__progress--bar">
+                <div class="savings__progress macBook"><span>45%</span></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="savings__container--contents">
+            <div class="savings__container--contents_row">
+              <div class="savings__title">
+                <h3>DevFest 2022</h3>
+                <p>₦ 15,000</p>
+              </div>
+              <span class="savings__category">Lifestyle</span>
+              <div class="savings__progress--bar">
+                <div class="savings__progress devfest"><span>90%</span></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+    <!-- =============== SCROLL UP ===============-->
+    <!-- <a href="" class="scrolltop" id="scroll-top">
+      <i class="bx bx-up-arrow-alt scrolltop--icon"></i>
+    </a> -->
+  </body>
+
+</html>
+
+<!-- <a href="https://storyset.com/people">People illustrations by Storyset</a> -->
