@@ -217,6 +217,7 @@ a {
   padding: 1.15rem 1rem;
   margin-top: 3rem;
   border-radius: 0.5rem;
+  position: relative;
 }
 
 .login--box span {
@@ -225,12 +226,37 @@ a {
   font-weight: var(--font-semi-bold);
 }
 
+.login--box .error-icon {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  display: none;
+}
+
+.login--box small {
+  position: absolute;
+  bottom: -40%;
+  left: 0;
+  display: none;
+}
+
+.login--box.error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.login--box.error .error-icon {
+  color: #ff0000;
+}
+
 .login--input {
   width: 100%;
   outline: none;
   border: none;
   font-size: var(--h2-font-size);
   color: var(--text-color-alt);
+  display: block;
 }
 
 .login--input::-moz-placeholder {
@@ -354,7 +380,7 @@ a {
   display: grid;
   gap: 1rem;
 }
-.activity-contents--methods form .method-label {
+.activity-contents--methods form label {
   font-size: 1rem;
 }
 .activity-contents--methods form .input__select--method,
@@ -381,7 +407,7 @@ a {
 .activity-contents--methods form .input__select--method .input__amount:focus,
 .activity-contents--methods form .input__amount--method .input__select:focus,
 .activity-contents--methods form .input__amount--method .input__amount:focus {
-  border-bottom: 1px solid var(--first-color);
+  border-bottom: 2px solid var(--first-color);
   font-size: var(--normal-font-size);
 }
 .activity-contents--methods form .option {
@@ -405,6 +431,10 @@ a {
 /* show Menu toggle from classList in JS */
 .show-menu {
   bottom: 0;
+}
+
+.error {
+  border-bottom: 1px solid red !important;
 }
 
 /* ========== HEADER =========== */
@@ -553,7 +583,7 @@ img.avatar {
   width: 38%;
   position: relative;
 }
-.account__container--overview .account-number .login--box-number .login--input--number {
+.account__container--overview .account-number .login--box-number .input__account--number {
   width: 100%;
   outline: none;
   border: none;

@@ -67,12 +67,33 @@
   padding: 1.15rem 1rem;
   margin-top: 3rem;
   border-radius: 0.5rem;
+  position: relative;
 }
 
 .login--box span {
   color: var(--first-color);
   font-size: var(--h2-font-size);
   font-weight: var(--font-semi-bold);
+}
+.login--box .error-icon {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  display: none;
+}
+.login--box small {
+  position: absolute;
+  bottom: -40%;
+  left: 0;
+  display: none;
+}
+.login--box.error {
+  border-bottom: 1px solid #ff0000;
+}
+.login--box.error .error-icon {
+  color: #ff0000;
 }
 
 .login--input {
@@ -81,6 +102,7 @@
   border: none;
   font-size: var(--h2-font-size);
   color: var(--text-color-alt);
+  display: block;
   // font-weight: var(--font-semi-bold);
 }
 

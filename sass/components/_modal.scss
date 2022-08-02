@@ -36,7 +36,7 @@
       display: grid;
       gap: 1rem;
 
-      .method-label {
+      label {
         font-size: 1rem;
       }
       .input__select--method,
@@ -59,17 +59,17 @@
         }
         .input__select:focus,
         .input__amount:focus {
-          border-bottom: 1px solid var(--first-color);
+          border-bottom: 2px solid var(--first-color);
           font-size: var(--normal-font-size);
         }
       }
-      .option{
+      .option {
         background-color: var(--container-color);
         color: var(--text-color);
       }
     }
     .input__deposit--method {
-      .input__btn{
+      .input__btn {
         border: none;
         display: block;
         background-color: var(--first-color);
@@ -89,4 +89,8 @@
 /* show Menu toggle from classList in JS */
 .show-menu {
   bottom: 0;
+}
+
+.error {
+  border-bottom: 1px solid red !important;
 }

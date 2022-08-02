@@ -53,12 +53,16 @@
 
               <div class="login--box">
                 <span class="material-icons">person</span>
-                <input type="text" placeholder="Username" class="login--input login__input--user">
+                <input type="text" placeholder="Username" class="login--input login__input--user" id="username">
+                <span class="material-icons error-icon">priority_high</span>
+                <small>Error message</small>
               </div>
 
               <div class="login--box">
                 <span class="material-icons">lock</span>
                 <input type="password" placeholder="Password" class="login--input login__input--pin" id="password">
+                <span class="material-icons error-icon">priority_high</span>
+                <small>Error message</small>
               </div>
 
               <div class="login--forget">
@@ -161,7 +165,7 @@
         <div class="account__container container">
           <div class="account__container--overview">
             <div class="account-name">
-              <h3>Tobiloba Ibraheem</h3>
+              <h3 class="welcome">Tobiloba Ibraheem</h3>
               <span>Active</span>
             </div>
 
@@ -173,7 +177,7 @@
             <div class="account-number">
 
               <div class="login--box-number">
-                <input type="text" class="login--input--number" value="2377742613">
+                <input type="text" class="input__account--number" value="2377742613">
                 <span class="account--number-btn">
                   <span class="material-icons">content_copy</span>
                 </span>
@@ -210,7 +214,8 @@
                 </div>
 
                 <div class="input__amount--method">
-                  <label class="method-label" value=""> How much would you like to add?</label>
+                  <label class="method-label label-deposit"> How much would you like to add?</label>
+
                   <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--deposit">
                 </div>
 
@@ -248,17 +253,17 @@
                 </div>
 
                 <div class="input__amount--method">
-                  <label class="method-label" value="">Type the selected account</label>
+                  <label class="method-label label__account--transfer" >Type the selected account</label>
                   <input type="text" placeholder="Account name" class="input__amount input__account--transfer">
                 </div>
 
                 <div class="input__amount--method">
-                  <label class="method-label" value=""> Account number of the receiver</label>
-                  <input type="number" placeholder="0000000000" class="input__amount input__amount--transfer">
+                  <label class="method-label label__number--transfer" > Account number of the receiver</label>
+                  <input type="number" placeholder="Account number" maxlength="10" class="input__amount input__number--transfer">
                 </div>
 
                 <div class="input__amount--method">
-                  <label class="method-label" value=""> How much would you like to send?</label>
+                  <label class="method-label label__amount--transfer" value=""> How much would you like to send?</label>
                   <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--transfer">
                 </div>
 
@@ -283,18 +288,18 @@
               <form action="">
 
                 <div class="input__amount--method">
-                  <label class="method-label" value="">Remember to buy for love ones😉</label>
+                  <label class="method-label label__number--airtime" >Remember to buy for love ones😉</label>
                   <input type="tel" placeholder="+243..........." class="input__amount input__number--airtime"
                     maxlength="11">
                 </div>
 
                 <div class="input__amount--method">
-                  <label class="method-label" value=""> How much would you like to buy?</label>
+                  <label class="method-label label__amount--airtime"> How much would you like to buy?</label>
                   <input type="number" placeholder="₦ 0.00" class="input__amount input__amount--airtime">
                 </div>
 
                 <div class="input__deposit--method">
-                  <button class="input__btn input__btn--airtime">Transfer</button>
+                  <button class="input__btn input__btn--airtime">Buy</button>
                 </div>
 
               </form>

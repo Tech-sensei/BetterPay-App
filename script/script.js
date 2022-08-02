@@ -1,30 +1,5 @@
 "use strict";
 
-// Declaring all the the variables
-const signUP = document.querySelector(".sign-up");
-const signIn = document.querySelector(".sign-in");
-const showLogin = document.querySelector(".login--in");
-const showRegister = document.querySelector(".login--create");
-const formImage = document.querySelector(".form--img");
-
-// Removing the hidden class from register form and putting it into login form
-
-const showRegisterForm = function () {
-  showRegister.classList.remove("hidden");
-  // formImage.src = 'register.png';
-
-  showLogin.classList.add("hidden");
-};
-
-const showLoginform = function () {
-  showRegister.classList.add("hidden");
-  // formImage.src = 'login.png';
-  showLogin.classList.remove("hidden");
-};
-signUP.addEventListener("click", showRegisterForm);
-
-signIn.addEventListener("click", showLoginform);
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 // User Data
 const account1 = {
@@ -32,6 +7,7 @@ const account1 = {
   transactions: [200, 450, -400, 3000, -650, -130, 70, 10000],
   interestRate: 1.2,
   pin: 5555,
+  accountNumber: 2377742613,
   movementsDates: [
     "2022-04-23T07:42:02.383Z",
     "2022-04-28T09:15:04.904Z",
@@ -49,6 +25,7 @@ const account2 = {
   transactions: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1.5,
   pin: 1111,
+  accountNumber: 1111111111,
   movementsDates: [
     "2022-04-23T07:42:02.383Z",
     "2022-04-28T09:15:04.904Z",
@@ -66,6 +43,7 @@ const account3 = {
   transactions: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.1,
   pin: 2222,
+  accountNumber: 3105109744,
   movementsDates: [
     "2022-03-18T21:31:17.178Z",
     "2022-04-23T07:42:02.383Z",
@@ -79,10 +57,11 @@ const account3 = {
 };
 
 const account4 = {
-  owner: "Akinpelu Grace",
+  owner: "Grace Akinpelu",
   transactions: [900, 150, -400, 3200, -650, -160, 1250, 1000],
   interestRate: 1.2,
   pin: 3333,
+  accountNumber: 3333333333,
   movementsDates: [
     "2022-03-18T21:31:17.178Z",
     "2022-04-23T07:42:02.383Z",
@@ -100,6 +79,7 @@ const account5 = {
   transactions: [430, 1000, 7000, 50, 900, -1500],
   interestRate: 1,
   pin: 4444,
+  accountNumber: 8140765477,
   movementsDates: [
     "2022-03-18T21:31:17.178Z",
     "2022-04-23T07:42:02.383Z",
@@ -117,9 +97,13 @@ const accounts = [account1, account2, account3, account4, account5];
 // SELECTING ALL THE NECESSARY ELEMENTS
 
 // Label
+const labelWelcome = document.querySelector(".welcome");
 const labelBalance = document.querySelector(".account-balance");
 const labelBalanceHide = document.querySelector(".balance-hide");
 const labelBalanceIcon = document.querySelector(".balance-icon");
+const labelTransferTo = document.querySelector(".label__account--transfer");
+const labelTransferNumber = document.querySelector(".label__number--transfer");
+const labelTransferAmount = document.querySelector(".label__amount--transfer");
 
 // Elements
 const body = document.querySelector(".body");
@@ -133,12 +117,23 @@ const containerMovements = document.querySelector(".movements");
 const loginBtn = document.querySelector(".login--button");
 const btnDeposit = document.querySelector(".input__btn--deposit");
 const btnTransfer = document.querySelector(".input__btn--transfer");
-const btnClose = document.querySelector(".input__btn--close");
+const btnAirtime = document.querySelector(".input__btn--airtime");
 // const btnSort = document.querySelector(".btn--sort");
 
 // input value
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
+
+const inputDepositAmount = document.querySelector(".input__amount--deposit");
+
+const inputTransferTo = document.querySelector(".input__account--transfer");
+const inputTransferNumber = document.querySelector(".input__number--transfer");
+const inputTransferAmount = document.querySelector(".input__amount--transfer");
+
+const inputAirtimeNumber = document.querySelector(".input__number--airtime");
+const inputAirtimeAmount = document.querySelector(".input__amount--airtime");
+
+const inputBillAmount = document.querySelector(".input__amount--paybill");
 
 //////////////////////////////////////////////////////////////////////////
 // CREATING REUSABLE FUNCTIONS
@@ -149,7 +144,7 @@ const updateUI = function (curAcc) {
   displayMovements(curAcc.transactions);
 
   // DisplayBalance
-  calcDisplayBalance(curAcc.transactions);
+  calcDisplayBalance(curAcc);
 
   //DisplaySummary
   // calcDisplaySummary(curAcc.transactions);
@@ -204,17 +199,17 @@ const displayMovements = function (cur) {
 /*//////////////////////////////////////////////////////////////////////*/
 //  IMPLEMENTING THE BALANCE
 const calcDisplayBalance = function (cur) {
-  currentAccount.transactions = cur.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.innerHTML = `₦ ${currentAccount.transactions}`;
+  cur.balance = cur.transactions.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.innerHTML = `₦ ${cur.balance}`;
 
   // // Implementing Hide Balance
   labelBalanceIcon.addEventListener("click", function () {
-    if ((labelBalance.innerHTML = `₦ ${account1.transactions}`)) {
+    if ((labelBalance.innerHTML = `₦ ${currentAccount.balance}`)) {
       labelBalance.classList.toggle("active-balance");
       if (labelBalanceIcon.classList.contains("fa-eye")) {
         labelBalanceIcon.classList.toggle("fa-eye-slash");
       }
-      if ((labelBalance.innerHTML = `₦ ${account1.transactions} `)) {
+      if ((labelBalance.innerHTML = `₦ ${currentAccount.balance} `)) {
         labelBalanceHide.classList.toggle("active-balance");
       } else {
         labelBalanceHide.classList.remove("active-balance");
@@ -225,7 +220,7 @@ const calcDisplayBalance = function (cur) {
   // Implementing account number copy
   const copyText = document.querySelector(" .account--number-btn");
   copyText.addEventListener("click", function () {
-    const input = document.querySelector(".login--input--number");
+    const input = document.querySelector(".input__account--number");
     // selecting the value of the account number
     input.select();
     // copying the text
@@ -257,6 +252,7 @@ createUsernames(accounts);
 let currentAccount;
 
 loginBtn.addEventListener("click", function (e) {
+  const labelAccountNumber = document.querySelector(".input__account--number");
   e.preventDefault();
 
   // Looking for the account that matches the username user input to the text field
@@ -264,17 +260,216 @@ loginBtn.addEventListener("click", function (e) {
     return acc.username === inputLoginUsername.value;
   });
 
-  // if (
-  //   currentAccount.username === inputLoginUsername.value &&
-  //   currentAccount.pin === Number(inputLoginPin.value)
-  // ) {
-  //   // Update UI
-  //   updateUI(currentAccount);
-  // }
-  // Display User Interface
-  if (showMain.classList.contains("hide-main")) {
-    showMain.classList.remove("hide-main");
-    hideMain.classList.add("hide-main");
+  if (
+    currentAccount?.username === inputLoginUsername.value &&
+    currentAccount?.pin === +inputLoginPin.value
+  ) {
+    // Display UI and message
+    labelWelcome.textContent = `Welcome, ${currentAccount.owner.split(" ")[0]}`;
+    labelAccountNumber.value = `${currentAccount.accountNumber}`;
+    console.log(labelAccountNumber.value);
+    // Update UI
+    updateUI(currentAccount);
+    // Display User Interface
+    if (showMain.classList.contains("hide-main")) {
+      showMain.classList.remove("hide-main");
+      hideMain.classList.add("hide-main");
+    }
+    displayActivityMenu();
   }
-  displayActivityMenu();
 });
+
+// IMPLEMENTING DEPOSIT
+btnDeposit.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Math.floor(inputDepositAmount.value);
+  const label = document.querySelector(".label-deposit");
+  if (amount > 0) {
+    // Add Transaction list
+    currentAccount.transactions.push(amount);
+    // Update UI
+    updateUI(currentAccount);
+  } else if (amount <= 0) {
+    inputDepositAmount.classList.add("error");
+    label.innerHTML = `<label style="color:red;"> Amount must be greater than ₦0! </label>`;
+  }
+  setTimeout(() => {
+    label.innerHTML = `<label> How much would you like to add?</label>`;
+    return inputDepositAmount.classList.remove("error");
+  }, 2500);
+  inputDepositAmount.value = "";
+});
+
+//===================================================
+
+// IMPLEMENTING TRANSFER
+btnTransfer.addEventListener("click", function (e) {
+  const amount = +inputTransferAmount.value;
+  const receiverName = accounts.find((acc) => {
+    return acc.owner === inputTransferTo.value;
+  });
+  const receiverNum = accounts.find((acc) => {
+    return acc.accountNumber === +inputTransferNumber.value;
+  });
+  e.preventDefault();
+
+  inputTransferAmount.value =
+    inputTransferTo.value =
+    inputTransferNumber.value =
+      "";
+  // console.log(receiverName, receiverNum, amount);
+  if (
+    amount > 0 &&
+    receiverName &&
+    receiverNum &&
+    currentAccount.balance >= amount &&
+    receiverName.username !== currentAccount.username &&
+    receiverNum.accountNumber !== currentAccount.accountNumber
+  ) {
+    // Doing the transfer
+    currentAccount.transactions.push(-amount);
+    receiverName.transactions.push(amount);
+    // Update UI
+    updateUI(currentAccount);
+  }
+
+  const transferValidation = function (e) {
+    if (amount <= 0) {
+      inputTransferAmount.classList.add("error");
+      labelTransferAmount.innerHTML = `<label style="color:red;"> Amount must be greater than ₦0! </label>`;
+    }
+    setTimeout(() => {
+      labelTransferAmount.innerHTML = `<label> How much would you like to send?</label>`;
+      return inputTransferAmount.classList.remove("error");
+    }, 2500);
+
+    if (currentAccount.balance < amount) {
+      inputTransferAmount.classList.add("error");
+      labelTransferAmount.innerHTML = `<label style="color:red;"> Insufficient Funds! </label>`;
+    }
+    setTimeout(() => {
+      labelTransferAmount.innerHTML = `<label> How much would you like to send?</label>`;
+      return inputTransferAmount.classList.remove("error");
+    }, 2500);
+
+    if (!receiverName) {
+      labelTransferTo.innerHTML = `<label style="color:red;">Account do not exist! </label>`;
+      inputTransferTo.classList.add("error");
+    }
+    setTimeout(() => {
+      labelTransferTo.innerHTML = `<label> Type the selected account </label>`;
+      return inputTransferTo.classList.remove("error");
+    }, 2500);
+
+    if (receiverName.username == currentAccount.username) {
+      labelTransferTo.innerHTML = `<label style="color:red;"> Cannot send money to yourself! </label>`;
+      inputTransferTo.classList.add("error");
+    }
+    setTimeout(() => {
+      labelTransferTo.innerHTML = `<label> Type the selected account </label>`;
+      return inputTransferTo.classList.remove("error");
+    }, 2500);
+
+    if (!receiverNum) {
+      labelTransferNumber.innerHTML = `<label style="color:red;"> Could not find account with that number! </label>`;
+      inputTransferNumber.classList.add("error");
+    }
+    setTimeout(() => {
+      labelTransferNumber.innerHTML = `<label> Account number of the receiver </label>`;
+      return inputTransferNumber.classList.remove("error");
+    }, 2500);
+
+    if (receiverNum.accountNumber == currentAccount.accountNumber) {
+      labelTransferNumber.innerHTML = `<label style="color:red;"> Cannot send money to yourself! </label>`;
+      inputTransferNumber.classList.add("error");
+    }
+    setTimeout(() => {
+      labelTransferNumber.innerHTML = `<label> Account number of the receiver </label>`;
+      return inputTransferNumber.classList.remove("error");
+    }, 2500);
+  };
+
+  transferValidation();
+
+  // else {
+  //   allInputAmount.forEach((cur) => cur.classList.add("error"));
+  // }
+  // setTimeout(() => {
+  //   allInputAmount.forEach((cur) => cur.classList.remove("error"));
+  // }, 1500);
+});
+
+// IMPLEMENTING AIRTIME PURCHASE
+btnAirtime.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Math.floor(inputAirtimeAmount.value);
+  let number = +inputAirtimeNumber.value;
+  console.log();
+  const labelAirtimeNumber = document.querySelector(".label__number--airtime");
+  const labelAirtimeAmount = document.querySelector(".label__amount--airtime");
+  if (
+    amount >= 50 &&
+    Number.isInteger(number) &&
+    String(number).length === 11
+  ) {
+    // Add Transaction list
+    currentAccount.transactions.push(-amount);
+    // Update UI
+    updateUI(currentAccount);
+  }
+  if (amount <= 50 || amount >= 100000) {
+    inputAirtimeAmount.classList.add("error");
+    labelAirtimeAmount.innerHTML = `<label style="color:red;"> Amount must be ₦50 - 100000 </label>`;
+  }
+  setTimeout(() => {
+    labelAirtimeAmount.innerHTML = `<label> How much would you like to buy?</label>`;
+    return inputAirtimeAmount.classList.remove("error");
+  }, 2500);
+
+  if (!Number.isInteger(number) || inputAirtimeNumber.value === "") {
+    inputAirtimeNumber.classList.add("error");
+    labelAirtimeNumber.innerHTML = `<label style="color:red;"> Enter a valid number!</label>`;
+  }
+  setTimeout(() => {
+    labelAirtimeNumber.innerHTML = `<label>Remember to buy for love ones😉</label>`;
+    return inputAirtimeNumber.classList.remove("error");
+  }, 2500);
+
+  if (String(number).length < 11) {
+    inputAirtimeNumber.classList.add("error");
+    labelAirtimeNumber.innerHTML = `<label style="color:red;">Number must be 11 characters</label>`;
+  }
+  setTimeout(() => {
+    labelAirtimeNumber.innerHTML = `<label>Remember to buy for love ones😉</label>`;
+    return inputAirtimeNumber.classList.remove("error");
+  }, 2500);
+
+  inputAirtimeNumber.value = inputAirtimeAmount.value = "";
+});
+
+// Declaring all the the variables
+const loginUserName = document.querySelector(".login__input--user");
+const loginPassword = document.querySelector(".login__input--pin");
+const signUP = document.querySelector(".sign-up");
+const signIn = document.querySelector(".sign-in");
+const showLogin = document.querySelector(".login--in");
+const showRegister = document.querySelector(".login--create");
+const formImage = document.querySelector(".form--img");
+
+// Removing the hidden class from register form and putting it into login form
+
+const showRegisterForm = function () {
+  showRegister.classList.remove("hidden");
+  // formImage.src = 'register.png';
+
+  showLogin.classList.add("hidden");
+};
+
+const showLoginform = function () {
+  showRegister.classList.add("hidden");
+  // formImage.src = 'login.png';
+  showLogin.classList.remove("hidden");
+};
+signUP.addEventListener("click", showRegisterForm);
+
+signIn.addEventListener("click", showLoginform);
