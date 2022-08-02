@@ -177,6 +177,20 @@ const displayActivityMenu = function (e) {
   });
 };
 
+const formatMovementDate = function (date) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+  if (daysPassed === 0) return "Today";
+  if (daysPassed === 1) return "Yesterday";
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+
+  return new Intl.DateTimeFormat().format(date);
+};
+
 //////////////////////////////////////////////////////////////////////////////
 // IMPLEMENTING THE TRANSACTION MOVEMENTS
 const displayMovements = function (cur) {
@@ -185,8 +199,12 @@ const displayMovements = function (cur) {
     const type = cur > 0 ? "IN" : "OUT";
     const details = cur > 0 ? "Earnings" : "Expenses";
 
+    const date = new Date(cur.movementsDates[i]);
+    const displayDate = formatMovementDate(date);
+
     const movementHTML = `
     <div class="movements__row">
+          <div class="movements__date">${displayDate}</div>
           <div class="movements__type movements__type--${type}">${type}</div>
            <div class="movements__detail">${details}</div>
           <div class="movements__value movements__type--${type}">₦ ${cur}</div>
@@ -329,6 +347,9 @@ btnTransfer.addEventListener("click", function (e) {
     // Doing the transfer
     currentAccount.transactions.push(-amount);
     receiverName.transactions.push(amount);
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
     // Update UI
     updateUI(currentAccount);
   }
