@@ -101,6 +101,8 @@ const labelWelcome = document.querySelector(".welcome");
 const labelBalance = document.querySelector(".account-balance");
 const labelBalanceHide = document.querySelector(".balance-hide");
 const labelBalanceIcon = document.querySelector(".balance-icon");
+const labelDate = document.querySelector(".account-status");
+console.log(labelDate);
 const labelTransferTo = document.querySelector(".label__account--transfer");
 const labelTransferNumber = document.querySelector(".label__number--transfer");
 const labelTransferAmount = document.querySelector(".label__amount--transfer");
@@ -137,11 +139,28 @@ const inputBillAmount = document.querySelector(".input__amount--paybill");
 
 //////////////////////////////////////////////////////////////////////////
 // CREATING REUSABLE FUNCTIONS
+// Implementing Transactions Date
+const locale = navigator.language;
+
+const formatDate = function (now, locale) {
+  const calcdaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcdaysPassed(new Date(), now);
+  if (daysPassed === 0) return "Today";
+  if (daysPassed === 1) return "Yesterday";
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+
+  // const day = `${now.getDate()}`.padStart(2, 0);
+  // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+  // const year = now.getFullYear();
+  return new Intl.DateTimeFormat(locale).format(now);
+};
 
 // Creating UI update function
 const updateUI = function (curAcc) {
   // Display transactions
-  displayMovements(curAcc.transactions);
+  displayMovements(curAcc);
 
   // DisplayBalance
   calcDisplayBalance(curAcc);
@@ -177,37 +196,23 @@ const displayActivityMenu = function (e) {
   });
 };
 
-const formatMovementDate = function (date) {
-  const calcDaysPassed = (date1, date2) =>
-    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
-
-  const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
-
-  if (daysPassed === 0) return "Today";
-  if (daysPassed === 1) return "Yesterday";
-  if (daysPassed <= 7) return `${daysPassed} days ago`;
-
-  return new Intl.DateTimeFormat().format(date);
-};
-
 //////////////////////////////////////////////////////////////////////////////
 // IMPLEMENTING THE TRANSACTION MOVEMENTS
 const displayMovements = function (cur) {
   containerMovements.innerHTML = "";
-  currentAccount.transactions.forEach((cur) => {
-    const type = cur > 0 ? "IN" : "OUT";
-    const details = cur > 0 ? "Earnings" : "Expenses";
+  cur.transactions.forEach((mov, i) => {
+    const type = mov > 0 ? "IN" : "OUT";
+    const details = mov > 0 ? "Earnings" : "Expenses";
 
-    const date = new Date(cur.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const now = new Date(cur.movementsDates[i]);
+    const date = formatDate(now, locale);
 
     const movementHTML = `
     <div class="movements__row">
-          <div class="movements__date">${displayDate}</div>
+          <div class="movements__date">${date}</div>
           <div class="movements__type movements__type--${type}">${type}</div>
            <div class="movements__detail">${details}</div>
-          <div class="movements__value movements__type--${type}">₦ ${cur}</div>
+          <div class="movements__value movements__type--${type}">₦ ${mov}</div>
         </div>    
     `;
     containerMovements.insertAdjacentHTML("afterbegin", movementHTML);
@@ -272,6 +277,20 @@ let currentAccount;
 loginBtn.addEventListener("click", function (e) {
   const labelAccountNumber = document.querySelector(".input__account--number");
   e.preventDefault();
+  const date = new Date();
+  const options = {
+    minute: "numeric",
+    hour: "numeric",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  };
+  const locale = navigator.language;
+  labelDate.innerHTML = new Intl.DateTimeFormat(locale, options).format(date);
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
 
   // Looking for the account that matches the username user input to the text field
   currentAccount = accounts.find((acc) => {
@@ -305,6 +324,10 @@ btnDeposit.addEventListener("click", function (e) {
   if (amount > 0) {
     // Add Transaction list
     currentAccount.transactions.push(amount);
+
+    // Add Deposit date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   } else if (amount <= 0) {
@@ -317,8 +340,6 @@ btnDeposit.addEventListener("click", function (e) {
   }, 2500);
   inputDepositAmount.value = "";
 });
-
-//===================================================
 
 // IMPLEMENTING TRANSFER
 btnTransfer.addEventListener("click", function (e) {
@@ -344,12 +365,14 @@ btnTransfer.addEventListener("click", function (e) {
     receiverName.username !== currentAccount.username &&
     receiverNum.accountNumber !== currentAccount.accountNumber
   ) {
-    // Doing the transfer
+    // Add Transactions
     currentAccount.transactions.push(-amount);
     receiverName.transactions.push(amount);
+
     // Add transfer date
     currentAccount.movementsDates.push(new Date().toISOString());
-    receiverAcc.movementsDates.push(new Date().toISOString());
+    receiverName.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -435,6 +458,10 @@ btnAirtime.addEventListener("click", function (e) {
   ) {
     // Add Transaction list
     currentAccount.transactions.push(-amount);
+
+    // Add Airtime date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
