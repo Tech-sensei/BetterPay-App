@@ -102,7 +102,6 @@ const labelBalance = document.querySelector(".account-balance");
 const labelBalanceHide = document.querySelector(".balance-hide");
 const labelBalanceIcon = document.querySelector(".balance-icon");
 const labelDate = document.querySelector(".account-status");
-console.log(labelDate);
 const labelTransferTo = document.querySelector(".label__account--transfer");
 const labelTransferNumber = document.querySelector(".label__number--transfer");
 const labelTransferAmount = document.querySelector(".label__amount--transfer");
@@ -141,7 +140,7 @@ const inputBillAmount = document.querySelector(".input__amount--paybill");
 // CREATING REUSABLE FUNCTIONS
 // Implementing Transactions Date
 const locale = navigator.language;
-
+// FORMATTING DATA AND TIME FOR TRANSACTION MOVEMENTS
 const formatDate = function (now, locale) {
   const calcdaysPassed = (date1, date2) =>
     Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
@@ -155,6 +154,14 @@ const formatDate = function (now, locale) {
   // const month = `${now.getMonth() + 1}`.padStart(2, 0);
   // const year = now.getFullYear();
   return new Intl.DateTimeFormat(locale).format(now);
+};
+
+// CREATING CURRENCY FORMAT
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: currency,
+  }).format(value);
 };
 
 // Creating UI update function
@@ -206,13 +213,14 @@ const displayMovements = function (cur) {
 
     const now = new Date(cur.movementsDates[i]);
     const date = formatDate(now, locale);
+    const formattedMov = formatCur(mov, "en-NG", "NGN");
 
     const movementHTML = `
     <div class="movements__row">
           <div class="movements__date">${date}</div>
           <div class="movements__type movements__type--${type}">${type}</div>
            <div class="movements__detail">${details}</div>
-          <div class="movements__value movements__type--${type}">₦ ${mov}</div>
+          <div class="movements__value movements__type--${type}">${formattedMov}</div>
         </div>    
     `;
     containerMovements.insertAdjacentHTML("afterbegin", movementHTML);
@@ -223,16 +231,17 @@ const displayMovements = function (cur) {
 //  IMPLEMENTING THE BALANCE
 const calcDisplayBalance = function (cur) {
   cur.balance = cur.transactions.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.innerHTML = `₦ ${cur.balance}`;
+  const formattedMov = formatCur(cur.balance, "en-NG", "NGN");
+  labelBalance.innerHTML = ` ${formattedMov}`;
 
   // // Implementing Hide Balance
   labelBalanceIcon.addEventListener("click", function () {
-    if ((labelBalance.innerHTML = `₦ ${currentAccount.balance}`)) {
+    if ((labelBalance.innerHTML = `${formattedMov}`)) {
       labelBalance.classList.toggle("active-balance");
       if (labelBalanceIcon.classList.contains("fa-eye")) {
         labelBalanceIcon.classList.toggle("fa-eye-slash");
       }
-      if ((labelBalance.innerHTML = `₦ ${currentAccount.balance} `)) {
+      if ((labelBalance.innerHTML = `${formattedMov} `)) {
         labelBalanceHide.classList.toggle("active-balance");
       } else {
         labelBalanceHide.classList.remove("active-balance");
