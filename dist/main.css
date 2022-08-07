@@ -220,6 +220,10 @@ a {
   position: relative;
 }
 
+.login__box-error {
+  border: 1px solid red;
+}
+
 .login--box span {
   color: var(--first-color);
   font-size: var(--h2-font-size);
@@ -1098,6 +1102,18 @@ img.avatar {
   text-align: center;
   width: 80%;
 }
+.homepage__container--agreement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.homepage__container--agreement .agreement-check {
+  color: var(--first-color);
+}
+.homepage__container--agreement .agreement-summary {
+  font-size: 1.2rem;
+}
 .homepage__container--button {
   width: 100%;
 }
@@ -1111,6 +1127,7 @@ img.avatar {
   text-align: center;
   font-weight: var(--font-semi-bold);
   transition: 0.3s;
+  color: #fff;
   cursor: pointer;
 }
 .homepage__container--button .homepage-button .homepage-link {

@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./dist/main.css" />
 
     <!-- ================ SCRIPT JS===================== -->
-    <script defer src="./script/script.js"></script>
+    <script defer type="module" src="./script/script.js"></script>
 
     <title>BetterPay</title>
   </head>
@@ -55,14 +55,12 @@
                 <span class="material-icons">person</span>
                 <input type="text" placeholder="Username" class="login--input login__input--user" id="username">
                 <span class="material-icons error-icon">priority_high</span>
-                <small>Error message</small>
               </div>
 
               <div class="login--box">
                 <span class="material-icons">lock</span>
                 <input type="password" placeholder="Password" class="login--input login__input--pin" id="password">
                 <span class="material-icons error-icon">priority_high</span>
-                <small>Error message</small>
               </div>
 
               <div class="login--forget">
@@ -118,17 +116,12 @@
     </main>
 
     <!-- ================ MAIN ============ -->
-    <main class="main hide-main">
+    <main class="main hide-main"> 
       <!-- ================ HEADER ============ -->
       <header class="header scroll-header" id="header">
         <nav class="nav container">
           <img src="./assests/avatar.png"class="avatar" alt="" />
-          
           <span class="material-icons notification--icon">notifications</span>
-          <!-- <div class="nav__header"> -->
-              <!-- <span></span> -->
-          <!-- </div> -->
-
         </nav>
       </header>
 
@@ -259,7 +252,7 @@
 
                 <div class="input__amount--method">
                   <label class="method-label label__number--transfer" > Account number of the receiver</label>
-                  <input type="number" placeholder="Account number" maxlength="10" class="input__amount input__number--transfer">
+                  <input type="tel" placeholder="Account number" maxlength="10" class="input__amount input__number--transfer">
                 </div>
 
                 <div class="input__amount--method">
@@ -541,12 +534,6 @@
         </div>
       </section>
     </main>
-    <!-- =============== SCROLL UP ===============-->
-    <!-- <a href="" class="scrolltop" id="scroll-top">
-      <i class="bx bx-up-arrow-alt scrolltop--icon"></i>
-    </a> -->
   </body>
 
 </html>
-
-<!-- <a href="https://storyset.com/people">People illustrations by Storyset</a> -->

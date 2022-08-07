@@ -54,6 +54,18 @@
         width: 80%;
       }
     }
+    &--agreement {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      .agreement-check {
+        color: var(--first-color);
+      }
+      .agreement-summary {
+        font-size: 1.2rem;
+      }
+    }
     &--button {
       width: 100%;
       .homepage-button {
@@ -66,6 +78,7 @@
         text-align: center;
         font-weight: var(--font-semi-bold);
         transition: 0.3s;
+        color: #fff;
         cursor: pointer;
         .homepage-link {
           color: #fff;
